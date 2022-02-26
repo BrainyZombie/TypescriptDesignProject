@@ -3,6 +3,7 @@ interface Markable{
         lat: number;
         lng: number;
     };
+    markerContent():string;
 }
 
 export class CustomMap {
@@ -19,9 +20,15 @@ export class CustomMap {
     }
 
     addMarker(to_mark: Markable){
-        new google.maps.Marker({
+        const popup = new google.maps.InfoWindow({
+            content: to_mark.markerContent()
+        });
+        const marker = new google.maps.Marker({
             map: this.googleMap,
             position: to_mark.location
+        });
+        marker.addListener("click", () => {
+            popup.open(this.googleMap, marker);
         });
     }
 }
