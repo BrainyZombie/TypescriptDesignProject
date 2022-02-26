@@ -1,6 +1,6 @@
 import faker from "faker"
- 
-export class User{
+import { Markable } from "./CustomMap";
+export class User implements Markable{
     name: string;
     location: {
         lat: number;
